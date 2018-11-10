@@ -18,9 +18,12 @@ module.exports = (app) => {
     request(newUrl).pipe(res);
   });
 
-  app.get('/api/suggestions/products/:productId', (req, res) => {
-    const productId = req.params.productId;
-    const newUrl = baseUrl+`/api/suggestions/products/${productId}`;
+  app.get('/api/suggestions/products', (req, res) => {
+    const params = req.query;
+    const productId = params.productId; 
+    const itemPerPage = params.itemPerPage;
+    const currentPageNumber = params.currentPageNumber;   
+    const newUrl = baseUrl+`/api/suggestions/products/${productId}?itemPerPage=${itemPerPage}&currentPageNumber=${currentPageNumber}`;
     request(newUrl).pipe(res);
   });
 }
