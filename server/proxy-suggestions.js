@@ -1,5 +1,6 @@
 const request = require('request');
 const proxyEndpoints = require('./libs/proxy-endpoints');
+require('dotenv').config();
 
 let env = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 let baseUrl = proxyEndpoints.suggestion[env];
@@ -10,8 +11,8 @@ module.exports = (app) => {
   	const id = req.params.id;
     const newUrl = baseUrl+`/api/products/${id}`;
     request(newUrl).pipe(res);
-  }); 
-  	
+  });
+
   app.get('/api/products', (req, res) => {
     const newUrl = baseUrl+'/api/products';
     request(newUrl).pipe(res);
