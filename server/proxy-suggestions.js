@@ -26,4 +26,11 @@ module.exports = (app) => {
     const newUrl = baseUrl+`/api/suggestions/products/${productId}?itemPerPage=${itemPerPage}&currentPageNumber=${currentPageNumber}`;
     request(newUrl).pipe(res);
   });
+
+  app.post('/api/suggestions', (req, res) => {
+    // expecting formData = {product1_id, product1_text, product2_id, product2_text}
+    const formData = req.body;
+    const newUrl = baseUrl+'/api/suggestions';
+    request.post(newUrl).form(formData).pipe(res);
+  });
 }
