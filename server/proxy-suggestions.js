@@ -18,9 +18,9 @@ module.exports = (app) => {
     request(newUrl).pipe(res);
   });
 
-  app.get('/api/suggestions/products', (req, res) => {
+  app.get('/api/suggestions/products/:id', (req, res) => {
     const params = req.query;
-    const productId = params.productId; 
+    const productId = req.params.id;
     const itemPerPage = params.itemPerPage;
     const currentPageNumber = params.currentPageNumber;   
     const newUrl = baseUrl+`/api/suggestions/products/${productId}?itemPerPage=${itemPerPage}&currentPageNumber=${currentPageNumber}`;

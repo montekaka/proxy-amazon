@@ -56,10 +56,9 @@ class Suggest extends React.Component {
     const itemPerPage = _this.state.itemPerPage;  
     const limit = _this.state.limit;    
     const widgetWidth = document.getElementById('widget-suggestions').clientWidth;
-    
-    axios.get(GET_PATH, {
+    const getPath = GET_PATH + id;
+    axios.get(getPath, {
       params: {
-        productId: id,
         itemPerPage: itemPerPage,
         currentPageNumber: _this.state.currentPageNumber
       }
