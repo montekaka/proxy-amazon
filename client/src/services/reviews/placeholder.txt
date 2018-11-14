@@ -1,3 +1,0 @@
-Folder for Hao-Han's reviews component.
-
-This placeholder file is here so git will commit the folder structure. Feel free to delete this when you're done!
