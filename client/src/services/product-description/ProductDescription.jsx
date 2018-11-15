@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Details from './Details.jsx';
 import Keywords from './Keywords.jsx';
-import '../style.css';
+import './style.css';
 
 class ProductDescription extends Component {
   render() {
