@@ -3,8 +3,8 @@ const path = require('path');
 const bodyParser = require('body-parser')
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/api/suggestions', bodyParser.json());
+app.use('/api/suggestions', bodyParser.urlencoded({ extended: false }));
 
 require('./proxy-suggestions')(app)
 app.use(express.static(path.join(__dirname, '/../client')));
