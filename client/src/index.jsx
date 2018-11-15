@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ProductDescription from './services/product-description/ProductDescription.jsx';
 import Suggest from './services/product-suggestions/suggest.jsx';
 import ReviewsContainer from './services/reviews/components/ReviewsContainer.jsx';
 
