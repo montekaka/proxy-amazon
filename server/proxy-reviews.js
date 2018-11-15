@@ -17,7 +17,6 @@ module.exports = (app) => {
   app.post('/api/reviews/:itemID', (req, res) => {
     const itemID = req.params.itemID;
     const newUrl = baseUrl + `/api/items/${itemID}`;
-    console.log(newUrl);
     req.pipe(request(newUrl)).pipe(res);
   });
 
