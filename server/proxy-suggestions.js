@@ -22,7 +22,7 @@ module.exports = (app) => {
     const params = req.query;
     const productId = req.params.id;
     const itemPerPage = params.itemPerPage;
-    const currentPageNumber = params.currentPageNumber;   
+    const currentPageNumber = params.currentPageNumber;
     const newUrl = baseUrl+`/api/suggestions/products/${productId}?itemPerPage=${itemPerPage}&currentPageNumber=${currentPageNumber}`;
     request(newUrl).pipe(res);
   });
