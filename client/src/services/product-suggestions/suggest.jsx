@@ -12,16 +12,16 @@ class Suggest extends React.Component {
     super(props);
     this.state = {
       id: '2',
-      data: [],
       displayData: [],
       currentPageNumber: 1,
       itemPerPage: 4,
       widgetWidth: 0,
+      nextPage: 0,
+      previousPage: 0
     };
 
     this.get = this.get.bind(this);
     this.handlePageActionClick = this.handlePageActionClick.bind(this);
-    this.getDisplayData = this.getDisplayData.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
 
@@ -32,20 +32,14 @@ class Suggest extends React.Component {
     this.handleResize();
   }
 
-  getDisplayData(currentPageNumber, itemPerPage, data) {
-    const fromId = (currentPageNumber - 1) * itemPerPage;
-    const toId = (currentPageNumber) * itemPerPage;
-    const displayData = data.slice(fromId, toId);
-    return displayData;
-  }
-
   handlePageActionClick(num) {
     const currentPageNumber = this.state.currentPageNumber + Number(num);
-    const itemPerPage = this.state.itemPerPage;
-    const data = this.state.data;
-    const displayData = this.getDisplayData(currentPageNumber, itemPerPage, data);
-    //console.log(currentPageNumber,displayData)
-    this.setState({displayData: displayData, currentPageNumber: currentPageNumber});
+    const _this = this;
+    if (currentPageNumber > 0) {
+      this.setState({currentPageNumber: currentPageNumber}, () => {
+        _this.get();
+      })
+    } 
   }
 
   handleResize() {
@@ -59,14 +53,21 @@ class Suggest extends React.Component {
     const _this = this;
     const id = _this.state.id;
     const currentPageNumber = _this.state.currentPageNumber;
-    const itemPerPage = _this.state.itemPerPage;    
+    const itemPerPage = _this.state.itemPerPage;  
+    const limit = _this.state.limit;    
     const widgetWidth = document.getElementById('widget-suggestions').clientWidth;
-    
-    axios.get(GET_PATH+id)
+    const getPath = GET_PATH + id;
+    axios.get(getPath, {
+      params: {
+        itemPerPage: itemPerPage,
+        currentPageNumber: _this.state.currentPageNumber
+      }
+    })
     .then((res) => {
       return res.data
     })
-    .then((suggestions) => {      
+    .then((data) => {
+      const suggestions = data['suggestions'];
       let promises = [];
       for (var i = 0; i < suggestions.length; i++) {
         var suggestProductPath = PRODUCT_GET_PATH+suggestions[i].suggestProductId;
@@ -81,10 +82,7 @@ class Suggest extends React.Component {
           return data;
         }))
         .then((data) => {
-          _this.setState({data: data, widgetWidth: widgetWidth}, () => {
-            const displayData = _this.getDisplayData(currentPageNumber, itemPerPage, data);
-            _this.setState({displayData: displayData});
-          })          
+          _this.setState({displayData: data, widgetWidth: widgetWidth})          
         })
         .catch((err) => {
           console.log(err);
@@ -98,7 +96,7 @@ class Suggest extends React.Component {
   render() {
     return (
       <div>
-        <h1>Total suggest items: {this.state.data.length}</h1>
+        <h1>Suggest items</h1>
         <div id="widget-suggestions" className="suggestions-widget">     
           <PageHandler actionLabel="<" actionClassName='previous' pageNum="-1" clickHandler={this.handlePageActionClick}/>
           <div className="items">
