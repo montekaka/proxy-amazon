@@ -15,6 +15,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
+        <ProductDescription id={this.state.itemID}/>
         <Suggest id={this.state.itemID}/>
         <ReviewsContainer itemID={this.state.itemID} userID={this.state.itemID} />
       </div>
