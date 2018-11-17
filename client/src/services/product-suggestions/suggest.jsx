@@ -4,8 +4,8 @@ import SuggestItem from './suggestItem.jsx';
 import PageHandler from './page-handler.jsx';
 import css from './css/style.css';
 
-const GET_PATH = 'http://localhost:3000/api/suggestions/products/';
-const PRODUCT_GET_PATH = 'http://localhost:3000/api/products/';
+const GET_PATH = '/api/suggestions/products/';
+const PRODUCT_GET_PATH = '/api/products/';
 
 class Suggest extends React.Component {
   constructor(props) {
