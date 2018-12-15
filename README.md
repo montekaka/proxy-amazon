@@ -5,23 +5,23 @@ To run:
 - "npm build" to build client files
 - "node server/index.js" to run server
 
-* Docker
+# Docker
 
-** Building a docker image
+## Building a docker image
 `docker build -t proxy-amazon .`
 
-** Running a Docker Container
+## Running a Docker Container
 `docker run -p 80:3000 {image-id}`
 
 Because we are running Docker locally, go to http://localhost to view
 
-** Check running Docker containers by typing
+## Check running Docker containers by typing
 `docker container ls`
 
-** Stop the container from running by
+## Stop the container from running by
 `docker stop {container-id}`
 
-** Deploy to ECS 
+## Deploy to ECS 
 1. Retrieve the login command to use to authenticate your Docker client to your registry.
 `aws ecr get-login --no-include-email --region us-west-1`
 
